@@ -1,6 +1,3 @@
-#
-#Incomplete, lots of garbage and test functions.  Use 'keyInput' function if any.
-#
 import urllib.request
 import json
 
