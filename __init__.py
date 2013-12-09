@@ -68,7 +68,7 @@ def mondoControl(cmd):
 	else:
 		try:
 			Mondo.route(cmd)
-			print(cmd)
+			addToLog("Set route to " + cmd)
 		except IOError:
 			messagebox.showinfo("Error", "Could not connect to Mondo.  Please contact the Audio Visual department: Ext. 33341")
 
