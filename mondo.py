@@ -12,7 +12,7 @@ class Mondo:
 
 	def find_port():
 		ser = serial.Serial(Mondo.comPort)  # open first serial port
-		print(ser.portstr)       # check which port was really used   \
+		print(ser.portstr)       # check which port was really used
 		ser.close()
 	
 	def get_config():
@@ -46,19 +46,7 @@ class Mondo:
 			print(r)
 		ser.close()
 
-	def out_off(n):
-		ser = serial.Serial(Mondo.comPort())
-		cmd = 'B' + n + "000"
-		ser.write(bytes(cmd + '\r\n', encoding='ascii'))
-		r = ser.readline()
-		r = r.decode('UTF-8').replace('\n', '')
-		if r == 'OK>':
-			print("Done.")
-		else:
-			print(r)
-		ser.close()
-
-	def test():
+	def map():
 		line = []
 		ser = serial.Serial(3)
 		ser.write(bytes("D" + '\r\n', encoding='ascii'))
@@ -67,7 +55,7 @@ class Mondo:
 			for c in ser.readline():
 				line.append(c)
 				if c == '\n':
-					print("Line: " + line)
+					print(line)
 					line = []
 					break
 		ser.close()
@@ -79,3 +67,22 @@ class Mondo:
 		r = r.decode('UTF-8').replace('\n', '')
 		return(r)
 
+	def save(): #Save current map to memory
+		ser = serial.Serial(Mondo.comPort())
+		ser.write(bytes("S" + '\r', encoding='ascii'))
+		r = ser.readline()
+		r = r.decode('UTF-8').replace('\n', '')
+		return(r)
+
+if __name__ == "__main__":
+
+	if argv[1] == "route": #Example Usage: mondo.py route [input number] [output number]
+		string = "B" + argv[3] + argv[2] #Mondo Matrix accepts IO numbers in reverse: B[out][in]
+		print "Routing input " + argv[3] + " to output " + argv[2]
+		print Mondo.route(string)
+
+	if argv[1] == "map":
+		Mondo.map()
+
+	if argv[1] == "save"
+		Mondo.save()
