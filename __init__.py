@@ -10,7 +10,6 @@ import os
 import time
 import threading
 
-
 master = Tk()
 master.geometry("1600x480")
 master.configure(background='black')
@@ -91,17 +90,13 @@ def outputSelected(event, name):
 	outputAddr.set(name)
 	event.configure(image=blueButtonImg)
 	outputPressed.append(event)
-	mondoControl("B016"+name)
+	mondoControl("B016"+name) #Route selected DTV box (output button) to preview screen on port 16
 
 def inputSelected(event, name):
 	mondoControl("B" + outputAddr.get() + name)
 
 def dtvSelected():
 	mondoControl("B" + outputAddr.get() + outputAddr.get())
-
-def placeWaiting():
-	waiting = Label(master, text="Please wait...", bg='white')
-	waiting.place(x=0, y=0)
 
 def dtvControl(ip, cmd):
 	if ip == "0":
@@ -116,6 +111,7 @@ def dtvControl(ip, cmd):
 		waiting.destroy()
 
 #Generate Output Buttons
+
 outputButtons=['001', '002', '003', '004', '005', '006', '007', '008', '009', '010', '011', '012', '013', '014', '015']
 outputButton = []
 outputButtonImgs = []
@@ -134,6 +130,8 @@ for button in outputButtons:
 	outputButtonImgs[num] = ImageTk.PhotoImage(file=imgLoc)
 	button.configure(image=outputButtonImgs[num], bg='black', bd=0)
 	outputButton.append(button)
+
+	#Layout all buttons
 	x+=100
 	if trackRow == 5:
 		x= 140
@@ -242,6 +240,5 @@ num9.place(x=1445, y=210)
 num0Img = ImageTk.PhotoImage(file='Buttons/directv/0.png')
 num0 = Button(master, text="0", image=num0Img, bg='black', bd=0, command=lambda: dtvControl(selectedBoxIP.get(), "0"))
 num0.place(x=1370, y=265)
-
 
 master.mainloop()
