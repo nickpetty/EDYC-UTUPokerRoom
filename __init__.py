@@ -68,6 +68,7 @@ def mondoControl(cmd):
 		try:
 			Mondo.route(cmd)
 			addToLog("Set route to " + cmd)
+			Mondo.save() #Save map after each route
 		except IOError:
 			messagebox.showinfo("Error", "Could not connect to Mondo.  Please contact the Audio Visual department: Ext. 33341")
 
