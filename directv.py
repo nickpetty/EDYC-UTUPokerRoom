@@ -11,18 +11,23 @@ class DirecTV:
 		return json.loads(req.read().decode(encoding)) #res contains json data
 
 	#Example of parsing
-	def get_info():
-		res = DirecTV.contact('http://192.168.1.100:8080/tv/getTuned') #10.43.112.22
+	def get_info(ip):
+		res = DirecTV.contact('http://' + ip + ':8080/tv/getTuned')
 		return(str(res['callsign']), str(res['major']), str(res['title']))
-		#print('INFO:', res['title'])
 
-	def chng_chnl(n):
-		url = 'http://192.168.1.100:8080/tv/tune?major=' + n
+	def chng_chnl(ip, n):
+		url = 'http://' + ip + ':8080/tv/tune?major=' + n
 		res = DirecTV.contact(url)
 		return res['status']['msg']
 
 	def keyInput(ip, n):
 		url = 'http://' + ip + ":8080/remote/processKey?key=" + n
 		res = DirecTV.contact(url)
-	#end
-#end
+
+if __name__ == "__main__":
+
+	if argv[1] == "info": # Sample: directv.py info 192.168.1.5
+		print DirecTV.get_info(argv[2])
+
+	if argv[1] == "channel": # Sample: directv.py channel 192.168.1.5 206
+		print chng_chnl(argv[2], argv[3])
