@@ -8,9 +8,12 @@ DirecTV.py
 ==========
 
 #### Sample usage:
-
+```
 py directv.py info 192.168.1.5
+```
+```
 py directv.py channel 192.168.1.5 206
+```
 
 <a name='mondo' /a>
 Mondo.py
