@@ -78,11 +78,11 @@ if __name__ == "__main__":
 
 	if argv[1] == "route": #Example Usage: mondo.py route [input number] [output number]
 		string = "B" + argv[3] + argv[2] #Mondo Matrix accepts IO numbers in reverse: B[out][in]
-		print "Routing input " + argv[3] + " to output " + argv[2]
-		print Mondo.route(string)
+		print("Routing input " + argv[3] + " to output " + argv[2])
+		print(Mondo.route(string))
 
 	if argv[1] == "map":
 		Mondo.map()
 
-	if argv[1] == "save"
+	if argv[1] == "save":
 		Mondo.save()

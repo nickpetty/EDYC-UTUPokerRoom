@@ -27,7 +27,7 @@ class DirecTV:
 if __name__ == "__main__":
 
 	if argv[1] == "info": # Sample: directv.py info 192.168.1.5
-		print DirecTV.get_info(argv[2])
+		print(DirecTV.get_info(argv[2]))
 
 	if argv[1] == "channel": # Sample: directv.py channel 192.168.1.5 206
-		print chng_chnl(argv[2], argv[3])
+		print(chng_chnl(argv[2], argv[3]))

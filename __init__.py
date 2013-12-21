@@ -67,8 +67,8 @@ def mondoControl(cmd):
 	else:
 		try:
 			Mondo.route(cmd)
-			addToLog("Set route to " + cmd)
-			Mondo.save() #Save map after each route
+			#addToLog("Set route to " + cmd)
+			#Mondo.save() #Save map after each route
 		except IOError:
 			messagebox.showinfo("Error", "Could not connect to Mondo.  Please contact the Audio Visual department: Ext. 33341")
 
@@ -91,13 +91,19 @@ def outputSelected(event, name):
 	outputAddr.set(name)
 	event.configure(image=blueButtonImg)
 	outputPressed.append(event)
-	mondoControl("B016"+name) #Route selected DTV box (output button) to preview screen on port 16
+	if name == '009' or name == '012':
+		mondoControl("B016002")
+	else:
+		mondoControl("B016"+name) #Route selected DTV box (output button) to preview screen on port 16
 
 def inputSelected(event, name):
 	mondoControl("B" + outputAddr.get() + name)
 
 def dtvSelected():
-	mondoControl("B" + outputAddr.get() + outputAddr.get())
+	if outputAddr.get() == '009' or if outputAddr.get() == '012':
+		mondoControl("B" + outputAddr.get() + '002')
+	else:
+		mondoControl("B" + outputAddr.get() + outputAddr.get())
 
 def dtvControl(ip, cmd):
 	if ip == "0":
