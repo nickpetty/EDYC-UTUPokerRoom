@@ -86,22 +86,56 @@ def outputSelected(event, name):
 		selectedBoxIP.set("0")
 		outputAddr.set("000")
 		outputPressed[:] = []
-	
-	selectedBoxIP.set(config.get("ip", name))
+
+	if name == '009' or name == '012':
+		selectedBoxIP.set(config.get("ip", '003'))
+	elif name == '010':
+		selectedBoxIP.set(config.get("ip", '009'))
+	elif name == '011':
+		selectedBoxIP.set(config.get("ip", '010'))
+	elif name == '013':
+		selectedBoxIP.set(config.get("ip", '011'))
+	elif name == '014':
+		selectedBoxIP.set(config.get("ip", '012'))
+	elif name == '015':
+		selectedBoxIP.set(config.get("ip", '013'))
+	else:
+		selectedBoxIP.set(config.get("ip", name))
+
 	outputAddr.set(name)
 	event.configure(image=blueButtonImg)
 	outputPressed.append(event)
 	if name == '009' or name == '012':
-		mondoControl("B016002")
+		mondoControl("B016003")
+	elif name == '010':
+		mondoControl("B016009")
+	elif name == '011':
+		mondoControl("B016010")
+	elif name == '013':
+		mondoControl("B016011")
+	elif name == '014':
+		mondoControl("B016012")
+	elif name == '015':
+		mondoControl("B016013")
 	else:
-		mondoControl("B016"+name) #Route selected DTV box (output button) to preview screen on port 16
+		mondoControl("B016"+name) # Route selected DTV box (output button) to preview screen on port 16
 
 def inputSelected(event, name):
 	mondoControl("B" + outputAddr.get() + name)
 
 def dtvSelected():
-	if outputAddr.get() == '009' or if outputAddr.get() == '012':
-		mondoControl("B" + outputAddr.get() + '002')
+	if outputAddr.get() == '009' or outputAddr.get() == '012':
+		mondoControl("B" + outputAddr.get() + '003')
+	elif outputAddr.get() == '010':
+		mondoControl("B" + outputAddr.get() + '009')
+	elif outputAddr.get() == '011':
+		mondoControl("B" + outputAddr.get() + '010')
+	elif outputAddr.get() == '013':
+		mondoControl("B" + outputAddr.get() + '011')
+	elif outputAddr.get() == '014':
+		mondoControl("B" + outputAddr.get() + '012')
+	elif outputAddr.get() == '015':
+		mondoControl("B" + outputAddr.get() + '013')
 	else:
 		mondoControl("B" + outputAddr.get() + outputAddr.get())
 
