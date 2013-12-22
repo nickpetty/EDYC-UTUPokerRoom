@@ -37,10 +37,9 @@ directvLogo.place(x=880, y=2)
 genButtonImg = ImageTk.PhotoImage(file='buttons/blackButton.png')
 clearButtonImg = ImageTk.PhotoImage(file='buttons/yellowButtonClear.png')
 goButtonImg = ImageTk.PhotoImage(file='buttons/orangeButtonGo.png')
-clockButtonImg = ImageTk.PhotoImage(file='buttons/blackButtonClock.png')
-waitlistButtonImg = ImageTk.PhotoImage(file='buttons/blackButtonWaitList.png')
-slideshowButtonImg = ImageTk.PhotoImage(file='buttons/blackButtonSlideShow.png')
-dtvButtonImg = ImageTk.PhotoImage(file='buttons/blackButtonDTV.png')
+clockButtonOneImg = ImageTk.PhotoImage(file='buttons/clockOne.png')
+clockButtonTwoImg = ImageTk.PhotoImage(file='buttons/clockTwo.png')
+clockButtonThreeImg = ImageTk.PhotoImage(file='buttons/clockThree.png')
 blueButtonImg = ImageTk.PhotoImage(file='buttons/blueButton.png')
 redButtonImg = ImageTk.PhotoImage(file='buttons/redButton.png')
 
@@ -79,7 +78,7 @@ def outputSelected(event, name):
 		each.configure(image=originalImg)
 		z+=1
 
-	if event in outputPressed:
+	if event in outputPressed: # Change previous button image back to original
 		number = int(name) - 1
 		originalImg = outputButtonImgs[number]
 		event.configure(image=originalImg)
@@ -105,7 +104,7 @@ def outputSelected(event, name):
 	outputAddr.set(name)
 	event.configure(image=blueButtonImg)
 	outputPressed.append(event)
-	if name == '009' or name == '012':
+	if name == '009' or name == '012': # Send DTV input to preview screen
 		mondoControl("B016003")
 	elif name == '010':
 		mondoControl("B016009")
@@ -120,8 +119,8 @@ def outputSelected(event, name):
 	else:
 		mondoControl("B016"+name) # Route selected DTV box (output button) to preview screen on port 16
 
-def inputSelected(event, name):
-	mondoControl("B" + outputAddr.get() + name)
+def inputSelected(event, inputNum):
+	mondoControl("B" + outputAddr.get() + inputNum)
 
 def dtvSelected():
 	if outputAddr.get() == '009' or outputAddr.get() == '012':
@@ -201,12 +200,12 @@ outputButton[13].configure(command=lambda: outputSelected(outputButton[13], "014
 outputButton[14].configure(command=lambda: outputSelected(outputButton[14], "015"))
 
 #Input Buttons
-clockButton = Button(master, image=clockButtonImg, width=90, height=90, bd=0, bg='black', command=lambda: inputSelected(clockButton, "016"))
-clockButton.place(x=190, y=370)
-waitlistButton = Button(master, image=waitlistButtonImg, width=90, height=90, bd=0, bg='black', command=lambda: inputSelected(waitlistButton, "017"))
-waitlistButton.place(x=290, y=370)
-slideshowButton = Button(master, image=slideshowButtonImg, width=90, height=90, bd=0, bg='black', command=lambda: inputSelected(slideshowButton, "018"))
-slideshowButton.place(x=390, y=370)
+clockButtonOne = Button(master, image=clockButtonOneImg, width=90, height=90, bd=0, bg='black', command=lambda: inputSelected(clockButtonOne, "014"))
+clockButtonOne.place(x=190, y=370)
+clockButtonTwo = Button(master, image=clockButtonTwoImg, width=90, height=90, bd=0, bg='black', command=lambda: inputSelected(clockButtonTwo, "015"))
+clockButtonTwo.place(x=290, y=370)
+clockButtonThree = Button(master, image=clockButtonThreeImg, width=90, height=90, bd=0, bg='black', command=lambda: inputSelected(clockButtonThree, "016"))
+clockButtonThree.place(x=390, y=370)
 dtvButton = Button(master, image=dtvButtonImg, width=90, height=90, bd=0, bg='black', command=lambda: dtvSelected())
 dtvButton.place(x=490, y=370)
 
