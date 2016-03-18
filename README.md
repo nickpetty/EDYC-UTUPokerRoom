@@ -32,4 +32,18 @@ py mondo.py map
 py mondo.py save
 ```
 
+##Model Numbers
+ + TV Models
+  + LG 42LN5300
+  + LG 55LN5310
+  + LG 60LN5400
+
++ DirecTV Receivers
+  + DIRECTV H24
+
++ Magenta Research Models
+  + Mondo Matrix i
+  + Multiview Transmitter Pack
+  + Multiview Receiver AK500
+
 ![Flow Chart](https://raw.githubusercontent.com/nickpetty/EDYC-UTUPokerRoom/master/Poker%20Room%20Control%20System%20-%20New%20Page.png)
